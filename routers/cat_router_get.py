@@ -2,6 +2,7 @@ from fastapi import APIRouter
 from sqlalchemy.orm import Session
 from sqlalchemy import desc, asc
 from fastapi import Depends, status, HTTPException
+from fastapi.responses import RedirectResponse
 from typing import Optional, List
 import model.modelo as modelo
 import db.database as database
@@ -13,7 +14,7 @@ get_db = database.get_db
 
 @router.get("/")
 async def main():
-    return 'Hello!'
+    return RedirectResponse(url="/docs")
 
 @router.get('/buscar_all', response_model=List[modelo.Show_cat], status_code=status.HTTP_202_ACCEPTED)
 async def busca(db:Session = Depends(get_db), sort: Optional[str] = None, limit: Optional[int] = None):
