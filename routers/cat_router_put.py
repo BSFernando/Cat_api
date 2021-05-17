@@ -22,3 +22,15 @@ async def update(item: modelo.Filter_cat, db:Session = Depends(get_db), id: Opti
     db.commit()
     logging.info('Updated item!')
     return 'Updated item!'
+
+@router.patch('/altera_class/', status_code=status.HTTP_202_ACCEPTED)
+async def alterar_class(item: modelo.Filter_cat, mudar: modelo.Filter_cat, db:Session = Depends(get_db)):
+    values_change = item.dict(exclude_none=True)
+    new_values = mudar.dict(exclude_none=True)
+    for attr,value in values_change.items():
+        whole_search = db.query(schema.Cat_schema)
+        whole_search = whole_search.filter(getattr(schema.Cat_schema,attr)==value)
+        whole_search.update({f'{attr}' : new_values[attr]})
+        db.commit()
+    logging.info('Updated items!')
+    return 'Updated items!'
