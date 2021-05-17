@@ -24,7 +24,7 @@ Requisições para a API devem seguir os padrões:
 
 ## POST
 
-. Corpo da requisição deve conter uma lista com três registros
+* Corpo da requisição deve conter uma lista com três registros
 ```python
 import requests
 
@@ -53,7 +53,7 @@ incluir_tres = requests.post('https://api-cat.herokuapp.com/include-three', json
         ])
 ```
 
-. Corpo da requisição deve conter apenas um registro
+* Corpo da requisição deve conter apenas um registro
 ```python
 import requests
 
@@ -69,17 +69,17 @@ incluir_um = requests.post('https://api-cat.herokuapp.com/include', json=
 
 ## GET
 
-. /cats?limit=5 para limitar busca a apenas 5 itens
-. /cats?sort=breed ou -breed para ordenar de forma crescente ou descrescente
+* /cats?limit=5 para limitar busca a apenas 5 itens
+* /cats?sort=breed ou -breed para ordenar de forma crescente ou descrescente
 ```python
 import requests
 
 buscar_todos = requests.get('https://api-cat.herokuapp.com/cats')
 ```
 
-. /filter-cats?limit=5 para limitar busca a apenas 5 itens
-. /filter-cats?sort=breed ou -breed para ordenar de forma crescente ou descrescente
-. /filter-cats?breed=gato1 seleciona apenas registros com breed==gato1
+* /filter-cats?limit=5 para limitar busca a apenas 5 itens
+* /filter-cats?sort=breed ou -breed para ordenar de forma crescente ou descrescente
+* /filter-cats?breed=gato1 seleciona apenas registros com breed==gato1
 ```python
 import requests
 
@@ -88,7 +88,7 @@ buscar_parametro = requests.get('https://api-cat.herokuapp.com/filter-cats?breed
 
 ## PUT
 
-. altera todos os parametros de acordo com o id 
+* altera todos os parametros de acordo com o id 
 ```python
 import requests
 alterar_um = requests.put('https://api-cat.herokuapp.com/change?id=1', json={
@@ -102,7 +102,7 @@ alterar_um = requests.put('https://api-cat.herokuapp.com/change?id=1', json={
 
 ## PATCH
 
-. altera o parametro de todos os registros independente do id 
+* altera o parametro de todos os registros independente do id 
 ```python
 import requests
 alterar_parametros = requests.patch('https://api-cat.herokuapp.com/change-parameters', json={
@@ -116,13 +116,13 @@ alterar_parametros = requests.patch('https://api-cat.herokuapp.com/change-parame
 
 ## DELETE
 
-. deleta registro de acordo com o id 
+* deleta registro de acordo com o id 
 ```python
 import requests
 deletar_id = requests.delete('https://api-cat.herokuapp.com/delete-id?id=1')
 ```
 
-. deleta todos os registros independente do id 
+* deleta todos os registros independente do id 
 ```python
 import requests
 deletar_parametros = requests.delete('https://api-cat.herokuapp.com/delete?pattern=pattern1&location_of_origin=SC')
