@@ -24,7 +24,10 @@ Requisições para a API devem seguir os padrões:
 
 ## POST
 
+. Corpo da requisição deve conter uma lista com três registros
 ```python
+import requests
+
 incluir_tres = requests.post('https://api-cat.herokuapp.com/include-three', json=[
         {
             "breed": "gato1",
@@ -48,7 +51,11 @@ incluir_tres = requests.post('https://api-cat.herokuapp.com/include-three', json
             "pattern": "pattern3"
         }
         ])
+```
 
+. Corpo da requisição deve conter apenas um registro
+```python
+import requests
 
 incluir_um = requests.post('https://api-cat.herokuapp.com/include', json=
         {
@@ -58,4 +65,65 @@ incluir_um = requests.post('https://api-cat.herokuapp.com/include', json=
         "body_type": "small",
         "pattern": "pattern1"
         })
+```
+
+## GET
+
+. /cats?limit=5 para limitar busca a apenas 5 itens
+. /cats?sort=breed ou -breed para ordenar de forma crescente ou descrescente
+```python
+import requests
+
+buscar_todos = requests.get('https://api-cat.herokuapp.com/cats')
+```
+
+. /filter-cats?limit=5 para limitar busca a apenas 5 itens
+. /filter-cats?sort=breed ou -breed para ordenar de forma crescente ou descrescente
+. /filter-cats?breed=gato1 seleciona apenas registros com breed==gato1
+```python
+import requests
+
+buscar_parametro = requests.get('https://api-cat.herokuapp.com/filter-cats?breed=gato1&sort=-coat_length')
+```
+
+## PUT
+
+. altera todos os parametros de acordo com o id 
+```python
+import requests
+alterar_um = requests.put('https://api-cat.herokuapp.com/change?id=1', json={
+        "breed": "gato10",
+        "location_of_origin": "RS",
+        "coat_length": 12.5,
+        "body_type": "small",
+        "pattern": "pattern2"
+    })
+```
+
+## PATCH
+
+. altera o parametro de todos os registros independente do id 
+```python
+import requests
+alterar_parametros = requests.patch('https://api-cat.herokuapp.com/change-parameters', json={
+        "item": {
+            "location_of_origin": "RS"
+        },
+        "mudar": {
+            "location_of_origin": "SC"
+        }})
+```
+
+## DELETE
+
+. deleta registro de acordo com o id 
+```python
+import requests
+deletar_id = requests.delete('https://api-cat.herokuapp.com/delete-id?id=1')
+```
+
+. deleta todos os registros independente do id 
+```python
+import requests
+deletar_parametros = requests.delete('https://api-cat.herokuapp.com/delete?pattern=pattern1&location_of_origin=SC')
 ```
