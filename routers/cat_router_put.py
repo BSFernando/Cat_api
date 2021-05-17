@@ -11,7 +11,7 @@ router = APIRouter(tags=['crud'])
 get_db = database.get_db
 
 @router.put('/change', status_code=status.HTTP_202_ACCEPTED)
-async def update(item: modelo.Filter_cat, db:Session = Depends(get_db), id: Optional[int] = None):
+async def update(item: modelo.Filter_cat, id: int, db:Session = Depends(get_db)):
     if id:
         whole_search = db.query(schema.Cat_schema).filter(schema.Cat_schema.id == id)
     if not whole_search.first():
@@ -23,7 +23,7 @@ async def update(item: modelo.Filter_cat, db:Session = Depends(get_db), id: Opti
     logging.info('Updated item!')
     return 'Updated item!'
 
-@router.patch('/change-parameters/', status_code=status.HTTP_202_ACCEPTED)
+@router.patch('/change-parameters', status_code=status.HTTP_202_ACCEPTED)
 async def alterar_class(item: modelo.Filter_cat, mudar: modelo.Filter_cat, db:Session = Depends(get_db)):
     values_change = item.dict(exclude_none=True)
     new_values = mudar.dict(exclude_none=True)
