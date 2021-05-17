@@ -127,3 +127,32 @@ deletar_id = requests.delete('https://api-cat.herokuapp.com/delete-id?id=1')
 import requests
 deletar_parametros = requests.delete('https://api-cat.herokuapp.com/delete?pattern=pattern1&location_of_origin=SC')
 ```
+
+# Instalar e testar (local)
+
+* Clone o repositório  cat_api localmente
+
+```bash
+/git init
+```
+```bash
+/git clone https://github.com/BSFernando/cat_api.git
+```
+
+* Execute requirements.txt
+
+```bash
+/pip install -r requirements.txt
+```
+
+* Executar a api localmente
+
+```bash
+/main.py
+```
+
+* Executar teste
+
+```bash
+/pytest test_api.py
+```
