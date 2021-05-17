@@ -12,7 +12,7 @@ import logging
 router = APIRouter(tags=['crud'])
 get_db = database.get_db
 
-@router.get("/")
+@router.get("/", include_in_schema=False)
 async def main():
     return RedirectResponse(url="/docs")
 
