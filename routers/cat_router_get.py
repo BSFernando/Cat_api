@@ -16,8 +16,8 @@ get_db = database.get_db
 async def main():
     return RedirectResponse(url="/docs")
 
-@router.get('/buscar_all', response_model=List[modelo.Show_cat], status_code=status.HTTP_202_ACCEPTED)
-async def busca(db:Session = Depends(get_db), sort: Optional[str] = None, limit: Optional[int] = None):
+@router.get('/cats', response_model=List[modelo.Show_cat], status_code=status.HTTP_202_ACCEPTED)
+async def search(db:Session = Depends(get_db), sort: Optional[str] = None, limit: Optional[int] = None):
     whole_search = db.query(schema.Cat_schema)
     if sort:
         if sort[0] == '-':
@@ -33,8 +33,8 @@ async def busca(db:Session = Depends(get_db), sort: Optional[str] = None, limit:
     logging.info('Search all itens: ok')
     return whole_search
 
-@router.get('/filtro_class', response_model=List[modelo.Show_cat], status_code=status.HTTP_202_ACCEPTED)
-async def filtrar_class(db:Session = Depends(get_db), breed : Optional[str] = None, 
+@router.get('/filter-cats', response_model=List[modelo.Show_cat], status_code=status.HTTP_202_ACCEPTED)
+async def search_par(db:Session = Depends(get_db), breed : Optional[str] = None, 
         location_of_origin : Optional[str] = None, coat_length : Optional[float] = None,
         body_type : Optional[str] = None, pattern : Optional[str] = None, sort: Optional[str] = None, limit: Optional[int] = None):
     
