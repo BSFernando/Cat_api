@@ -8,7 +8,7 @@ def test_main():
     assert value_main.status_code == 200
 
 def test_post_three():
-    value_post_three = client.post('/insere_tres', json=[
+    value_post_three = client.post('/include-three', json=[
         {
             "breed": "gato1",
             "location_of_origin": "RS",
@@ -34,7 +34,7 @@ def test_post_three():
     assert value_post_three.status_code == 201
 
 def test_post_one():
-    value_post_one = client.post('/insere_one', json=
+    value_post_one = client.post('/include', json=
         {
         "breed": "gato4",
         "location_of_origin": "RS",
@@ -45,12 +45,31 @@ def test_post_one():
     assert value_post_one.status_code == 201
 
 def test_search_all():
-    value_all = client.get('/buscar_all')
+    value_all = client.get('/cats')
     assert value_all.status_code == 202
 
 def test_filter():
-    value_filter = client.get('/filtro_class?breed=gato1&sort=-coat_length')
+    value_filter = client.get('/filter-cats?breed=gato1&sort=-coat_length')
     assert value_filter.status_code == 202
+
+def test_update():
+    value_filter = client.put('/change?id=1', json={
+        "breed": "gato2",
+        "location_of_origin": "RS",
+        "coat_length": 12.5,
+        "body_type": "small",
+        "pattern": "pattern2"
+    })
+    assert value_filter.status_code == 202
+
+def test_patch():
+    value_filter = client.put('/change-parameters', json={
+        "item": {
+            "location_of_origin": "RS"
+        },
+        "mudar": {
+            "location_of_origin": "SC",
+        }})
 
 def test_delete_id():
     value_delete = client.delete('/delete-id?id=1')
